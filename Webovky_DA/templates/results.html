@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Life in Numbers - Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head> 
+<body>
+  <div class="logo-corner">
+    <img src="{{ url_for('static', filename='pivot.jpg') }}" alt="Logo" />
+    <span>Project Pivot</span>
+  </div>
+
+  <div class="main-content">
+    <h1 class="main-title">Life in Numbers: An Analysis of the Periods That Shaped Our Society</h1>
+
+    <div class="fun-fact">
+      <b>Fun Fact About the Year {{ selected_year }}:</b><br>
+      {{ fun_fact }}
+    </div>
+
+    <div class="selected-params">
+      <strong>Your selection:</strong>
+      <span class="param-pair">Year: {{ selected_year }}</span> 
+      <span class="param-pair">Gender: {{ selected_gender|capitalize }}</span> 
+      <span class="param-pair">Age category: {{ selected_age_category }}</span> 
+      <span class="param-pair">Sector: {{ selected_industry_sector }}</span>  
+    </div>
+
+    <div class="results-frame">
+      {% if life_data|length > 0 %}
+      <section class="dashboard-col life">
+        <div class="dashboard-header">Life milestones</div>
+        <div class="dashboard-years">
+          <div class="dashboard-pill">{{ current_year }}</div>
+          <div class="dashboard-pill">{{ selected_year }}</div>
+        </div>
+        {% for item in life_data %}
+        <div class="dashboard-box">
+          <div class="dashboard-box-title">{{ item.key }}</div>
+          <div class="dashboard-box-content">
+            <div class="dashboard-value">{{ item.current }}</div>
+            <div class="dashboard-icon">{{ item.emoji }}{% if item.label %}<span class="icon-label">{{ item.label }}</span>{% endif %}</div>
+            <div class="dashboard-value">{{ item.selected }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      <section class="dashboard-col finance">
+        <div class="dashboard-header">Finance</div>
+        <div class="dashboard-years">
+          <div class="dashboard-pill">{{ current_year }}</div>
+          <div class="dashboard-pill">{{ selected_year }}</div>
+        </div>
+        {% for item in finance_data %}
+        <div class="dashboard-box">
+          <div class="dashboard-box-title">{{ item.key }}</div>
+          <div class="dashboard-box-content">
+            <div class="dashboard-value">{{ item.current }}</div>
+            <div class="dashboard-icon">{{ item.emoji }}{% if item.label %}<span class="icon-label">{{ item.label }}</span>{% endif %}</div>
+            <div class="dashboard-value">{{ item.selected }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+    </div>
+
+    <div class="back-link-container">
+      <a href="/" class="back-link">← Back to Form</a>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const logo = document.querySelector('.logo-corner');
+      const mainContent = document.querySelector('.main-content');
+  
+      if (!logo || !mainContent) return;
+  
+      function onScroll() {
+        if (window.scrollY === 0) {
+          logo.style.opacity = 1;
+          return;
+        }
+  
+        const logoBottom = logo.getBoundingClientRect().bottom;
+        const contentTop = mainContent.getBoundingClientRect().top;
+        const fadeStart = 150;
+  
+        let distance = contentTop - logoBottom;
+        let opacity = distance / fadeStart;
+        opacity = Math.min(Math.max(opacity, 0), 1);
+  
+        logo.style.opacity = opacity;
+      }
+  
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    };
+  </script>  
+</body>
+</html>
