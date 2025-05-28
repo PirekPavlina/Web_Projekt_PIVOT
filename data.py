@@ -154,4 +154,3 @@ def load_data(year, gender, age_category, industry_sector):
 
         return data
     
-
