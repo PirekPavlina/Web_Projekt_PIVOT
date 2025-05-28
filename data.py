@@ -7,7 +7,7 @@ load_dotenv()
 
 conn_str = os.getenv("DB_CONNECTION_STRING")
 if not conn_str:
-    raise ValueError("DB_CONNECTION_STRING není nastavena v prostředí")
+    raise ValueError("DB_CONNECTION_STRING not set in the environment")
 
 params = urllib.parse.quote_plus(conn_str)
 conn_str = f'mssql+pyodbc:///?odbc_connect={params}'
