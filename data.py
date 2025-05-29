@@ -137,7 +137,7 @@ def load_data(year, gender, age_category, industry_sector):
             prob_multi = None
            
         data = {
-            "How fat your paycheck would be": f"{avg_income:.0f} CZK" if avg_income else "N/A",
+            "How fat your paycheck would be": f"{format(avg_income, ',.0f').replace(',', ' ')} CZK" if avg_income else "N/A",
             "House price to income ratio": f"{round(house_price_ratio,1)}" if house_price_ratio else "N/A",
             "The chance you once said 'I do'": f"{round(married_ratio,1)} %" if married_ratio else "N/A",
             "The chance you've already signed divorce paper": f"{round(divorced_ratio,1)} %" if divorced_ratio else "N/A",
@@ -148,9 +148,9 @@ def load_data(year, gender, age_category, industry_sector):
         if gender == "female":
             data["The chance you had your first child in that year"] = f"{prob_first} %" if prob_first is not None else "N/A"
             data["The chance you had another child in that year"] = f"{prob_multi} %" if prob_multi is not None else "N/A"
-            data["The price of 2 dcl wine"] = f"{consumer_price} CZK" if consumer_price is not None else "N/A"
+            data["The price of 2 dcl wine"] = f"{round(consumer_price,1)} CZK" if consumer_price is not None else "N/A"
         else:  # male
-            data["The price of 0.5 l beer"] = f"{consumer_price_1} CZK" if consumer_price_1 is not None else "N/A"
+            data["The price of 0.5 l beer"] = f"{round(consumer_price_1,1)} CZK" if consumer_price_1 is not None else "N/A"
 
         return data
     
