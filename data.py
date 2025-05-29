@@ -138,7 +138,7 @@ def load_data(year, gender, age_category, industry_sector):
            
         data = {
             "How fat your paycheck would be": f"{avg_income:.0f} CZK" if avg_income else "N/A",
-            "House price to income ratio": f"{round(house_price_ratio,1)}×" if house_price_ratio else "N/A",
+            "House price to income ratio": f"{round(house_price_ratio,1)}" if house_price_ratio else "N/A",
             "The chance you once said 'I do'": f"{round(married_ratio,1)} %" if married_ratio else "N/A",
             "The chance you've already signed divorce paper": f"{round(divorced_ratio,1)} %" if divorced_ratio else "N/A",
             "The chance you ever wore a Bc.graduation cap": f"{round(education_bachelor,1)} %" if education_bachelor is not None else "N/A",
