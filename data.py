@@ -11,7 +11,7 @@ if not conn_str:
 
 params = urllib.parse.quote_plus(conn_str)
 conn_str = f'mssql+pyodbc:///?odbc_connect={params}'
-engine = create_engine(conn_str)
+engine = create_engine(conn_str, pool_pre_ping=True)
 
 def get_industries_by_year(year):
     query = """
