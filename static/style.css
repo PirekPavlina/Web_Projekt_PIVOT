@@ -351,10 +351,10 @@ button:active {
 
 /* Extra small devices (mobiles to 400px) */
 @media (max-width: 400px) {
-  .form-frame {
+  /* .form-frame {
     padding: 15px 10px;
     margin: 0 auto 25px auto;
-  }
+  } */
   .selected-params {
     padding-left: 8px;
     padding-right: 8px;
@@ -382,23 +382,23 @@ button:active {
     padding: 6px 10px;
     max-width: 98%;
   }
-  .results-frame {
+  /* .results-frame {
     max-width: 95%;
     padding-left: 8px;
     padding-right: 8px;
     justify-content: center;
     gap: 2px 8px;
-  }
+  } */
 
 }
 
 /* Small devices (mobiles to 600px) */
 @media (max-width: 600px) {
-  .form-frame {
+  /* .form-frame {
     max-width: 100%;
     padding: 20px 16px;
     margin: 0 auto 30px auto;
-  }
+  } */
   .selected-params {
     padding-left: 10px;
     padding-right: 10px;
@@ -427,13 +427,13 @@ button:active {
     max-width: 95%;
     margin: 0 auto 20px auto;
   }
-  .results-frame {
+  /* .results-frame {
     max-width: 95%;
     padding-left: 10px;
     padding-right: 10px;
     justify-content: center;
     gap: 8px 12px;
-  }
+  } */
   .dashboard-years {
     gap: 30px;
     justify-content: center;
@@ -450,13 +450,13 @@ button:active {
 
 /* Middle devices (tablets to 1000px) */
 @media (max-width: 1000px) {
-  .form-frame {
+  /* .form-frame {
     max-width: 100%;
     padding-left: 10px;
     padding-right: 10px;
     margin: 0 auto 38px auto;
     box-sizing: border-box;
-  }
+  } */
   .selected-params {
     padding-left: 24px; 
     padding-right: 24px;
@@ -490,13 +490,13 @@ button:active {
     max-width: 95%;
     margin: 0 auto 20px auto;
   }
-  .results-frame {
+  /* .results-frame {
     flex-direction: column;
     gap: 16px;
     padding-left: 24px;
     padding-right: 24px;
     max-width: 100%;
-  }
+  } */
   .dashboard-years {
     gap: 30px;
     justify-content: center;
@@ -513,12 +513,12 @@ button:active {
 
 /* Desktop (over 1000px) */
 @media (min-width: 1001px) {
-  .form-frame {       
+  /* .form-frame {       
     width: 100%;
     padding: 28px 32px 32px 32px; 
     margin: 0 auto 38px auto;
     box-sizing: border-box;
-  }
+  } */
   .selected-params {
     padding-left: 155px; 
     padding-right: 24px;
@@ -551,13 +551,13 @@ button:active {
     max-width: 95%;
     margin: 0 auto 20px auto;
   }
-  .results-frame {
+  /* .results-frame {
     flex-direction: column;
     gap: 16px;
     padding-left: 24px;
     padding-right: 24px;
     max-width: 100%;
-  }
+  } */
   .dashboard-years {
     gap: 30px;
     justify-content: center;
