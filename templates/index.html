@@ -80,5 +80,34 @@
       }
     });
   </script>
+  
+  <script>
+    window.onload = () => {
+      const logo = document.querySelector('.logo-corner');
+      const mainContent = document.querySelector('.main-content');
+  
+      if (!logo || !mainContent) return;
+  
+      function onScroll() {
+        if (window.scrollY === 0) {
+          logo.style.opacity = 1;
+          return;
+        }
+  
+        const logoBottom = logo.getBoundingClientRect().bottom;
+        const contentTop = mainContent.getBoundingClientRect().top;
+        const fadeStart = 150;
+  
+        let distance = contentTop - logoBottom;
+        let opacity = distance / fadeStart;
+        opacity = Math.min(Math.max(opacity, 0), 1);
+  
+        logo.style.opacity = opacity;
+      }
+  
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    };
+  </script>  
 </body>
 </html>
