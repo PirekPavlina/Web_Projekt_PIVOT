@@ -410,6 +410,11 @@ button:active {
     max-width: 95%;
     margin: 0 auto 20px auto;
   }
+
+  .results-frame {
+    padding: 0 10px;
+  }
+  
   .dashboard-years {
     gap: 30px;
     justify-content: center;
