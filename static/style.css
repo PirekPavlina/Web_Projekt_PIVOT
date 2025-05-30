@@ -195,13 +195,12 @@ button:active {
 .param-pair {
   white-space: nowrap;      
   display: inline-block;     
-  margin-right: 8px;
   position: relative;        
 }
 
 .param-pair::after {
   content: " |";
-  margin-left: 4px;
+  margin-left: 2px;
   color: #71647C; 
   font-weight: 600;
 }
@@ -284,7 +283,7 @@ button:active {
   background: #D2ABAB;
   color: #473E62;
   border-radius: 16px 16px 0 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
   padding: 10px 0;
