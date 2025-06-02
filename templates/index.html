@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Life in Numbers - Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- --- Logo Section --- -->
+  <div class="logo-corner">
+    <span class="logo-text-left">Project</span>
+    <img src="{{ url_for('static', filename='pivot.jpg') }}" alt="Logo" />
+    <span class="logo-text-right">Pivot</span>
+  </div>
+
+  <!-- --- Logo Background --- -->
+  <div class="logo-white-box"></div>
+  <div class="logo-colored-box"></div>
+
+  <!-- --- Main Content --- -->
+  <div class="main-content">
+
+    <!-- --- Hero Section --- -->
+    <div class="hero-wrapper">
+      <div class="background-shape pink-shape"></div>
+      <div class="background-shape purple-shape"></div>
+      <h1 class="hero-title">
+        <span class="part1">Life in Numbers:</span>
+        <span class="part2"> An Analysis of</span><br>
+        <span class="part3">the Periods That</span>
+        <span class="part4">Shaped Our Society</span>
+      </h1>
+    </div>
+
+    <!-- --- Form Section --- -->
+    <div class="form-frame">
+      <h2 class="form-frame-title">Select Parameters</h2>
+      <form method="post">
+
+        <!-- Year -->
+        <label for="year">Year:</label>
+        <select name="year" id="year" required>
+          {% for y in years %}
+            {% if 2002 <= y <= 2020 %}
+              <option value="{{ y }}">{{ y }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+
+        <!-- Gender -->
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
+        <!-- Age Category -->
+        <label for="age_category">Age Category:</label>
+        <select name="age_category" id="age_category" required>
+          {% for a in ages %}
+            <option value="{{ a }}">{{ a }}</option>
+          {% endfor %}
+        </select>
+
+        <!-- Sector -->
+        <label for="industry_sector">Sector:</label>
+        <select name="industry_sector" id="industry_sector" required>
+          {% for s in sectors %}
+            <option value="{{ s }}">{{ s }}</option>
+          {% endfor %}
+        </select>
+
+        <button type="submit">Show results</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- --- Industry Loader Script --- -->
+  <script>
+    function updateIndustries(year) {
+      fetch(`/get-industries/${year}`)
+        .then(response => response.json())
+        .then(data => {
+          const sectorSelect = document.getElementById('industry_sector');
+          sectorSelect.innerHTML = '';
+          data.forEach(industry => {
+            const option = document.createElement('option');
+            option.value = industry;
+            option.textContent = industry;
+            sectorSelect.appendChild(option);
+          });
+        })
+        .catch(error => {
+          console.error('Error loading industry:', error);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const yearSelect = document.getElementById('year');
+      if (yearSelect) {
+        updateIndustries(yearSelect.value);
+        yearSelect.addEventListener('change', (e) => {
+          updateIndustries(e.target.value);
+        });
+      }
+    });
+  </script>
+
+  <!-- --- Logo Opacity on Scroll --- -->
+  <script>
+    window.onload = () => {
+      const logo = document.querySelector('.logo-corner');
+      const logoBox = document.querySelector('.logo-white-box');
+      const logoColoredBox = document.querySelector('.logo-colored-box');
+      const mainContent = document.querySelector('.main-content');
+  
+      if (!logo || !mainContent) return;
+  
+      function onScroll() {
+        if (window.scrollY === 0) {
+          logo.style.opacity = 1;
+          if (logoBox) logoBox.style.opacity = 1;
+          if (logoColoredBox) logoColoredBox.style.opacity = 1;
+          return;
+        }
+  
+        const logoBottom = logo.getBoundingClientRect().bottom;
+        const contentTop = mainContent.getBoundingClientRect().top;
+        const fadeStart = 150;
+  
+        let distance = contentTop - logoBottom;
+        let opacity = distance / fadeStart;
+        opacity = Math.min(Math.max(opacity, 0), 1);
+  
+        logo.style.opacity = opacity;
+        if (logoBox) logoBox.style.opacity = opacity;  
+        if (logoColoredBox) logoColoredBox.style.opacity = opacity;
+      }
+  
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    };
+  </script>
+
+</body>
+</html>

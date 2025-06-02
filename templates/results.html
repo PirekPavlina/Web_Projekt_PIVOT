@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Life in Numbers - Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- --- Logo Section --- -->
+  <div class="logo-corner">
+    <span class="logo-text-left">Project</span>
+    <img src="{{ url_for('static', filename='pivot.jpg') }}" alt="Logo" />
+    <span class="logo-text-right">Pivot</span>
+  </div>
+
+  <!-- --- Logo Background --- -->
+  <div class="logo-white-box"></div>
+  <div class="logo-colored-box"></div>
+
+  <!-- --- Main Content --- -->
+  <div class="main-content">
+
+    <!-- --- Hero Section --- -->
+    <div class="hero-wrapper">
+      <div class="background-shape pink-shape"></div>
+      <div class="background-shape purple-shape"></div>
+      <h1 class="hero-title">
+        <span class="part1">Life in Numbers:</span>
+        <span class="part2"> An Analysis of</span><br>
+        <span class="part3">the Periods That</span>
+        <span class="part4">Shaped Our Society</span>
+      </h1>
+    </div>
+
+    <!-- --- Fun Fact --- -->
+    <div class="fun-fact">
+      <b>Fun Fact About the Year {{ selected_year }}:</b><br>
+      {{ fun_fact }}
+    </div>
+
+    <!-- --- Selected Parameters --- -->
+    <div class="selected-params">
+      <strong>Your selection:</strong>
+      <span class="param-pair">Year: {{ selected_year }}</span> 
+      <span class="param-pair">Gender: {{ selected_gender|capitalize }}</span> 
+      <span class="param-pair">Age category: {{ selected_age_category }}</span> 
+      <span class="param-pair">Sector: {{ selected_industry_sector }}</span>  
+    </div>
+
+    <!-- --- Results Frame --- -->
+    <div class="results-frame">
+
+      <!-- Life Milestones -->
+      {% if life_data|length > 0 %}
+      <section class="dashboard-col life">
+        <div class="dashboard-header">Life milestones</div>
+        <div class="dashboard-years">
+          <div class="dashboard-pill">{{ current_year }}</div>
+          <div class="dashboard-pill">{{ selected_year }}</div>
+        </div>
+
+        {% for item in life_data %}
+        <div class="dashboard-box">
+          <div class="dashboard-box-title">{{ item.key }}</div>
+          <div class="dashboard-box-content">
+            <div class="dashboard-value">{{ item.current }}</div>
+            <div class="dashboard-icon">
+              {{ item.emoji }}
+              {% if item.label %}
+                <span class="icon-label">{{ item.label }}</span>
+              {% endif %}
+            </div>
+            <div class="dashboard-value">{{ item.selected }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      <!-- Finance Section -->
+      <section class="dashboard-col finance">
+        <div class="dashboard-header">Finance</div>
+        <div class="dashboard-years">
+          <div class="dashboard-pill">{{ current_year }}</div>
+          <div class="dashboard-pill">{{ selected_year }}</div>
+        </div>
+
+        {% for item in finance_data %}
+        <div class="dashboard-box">
+          <div class="dashboard-box-title">{{ item.key }}</div>
+          <div class="dashboard-box-content">
+            <div class="dashboard-value">{{ item.current }}</div>
+            <div class="dashboard-icon">
+              {{ item.emoji }}
+              {% if item.label %}
+                <span class="icon-label">{{ item.label }}</span>
+              {% endif %}
+            </div>
+            <div class="dashboard-value">{{ item.selected }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+
+    </div>
+
+    <!-- --- Back Link --- -->
+    <div class="back-link-container">
+      <a href="/" class="back-link">← Back to Form</a>
+    </div>
+
+  </div>
+
+  <!-- --- Logo Opacity on Scroll --- -->
+  <script>
+    window.onload = () => {
+      const logo = document.querySelector('.logo-corner');
+      const logoBox = document.querySelector('.logo-white-box');
+      const logoColoredBox = document.querySelector('.logo-colored-box');
+      const mainContent = document.querySelector('.main-content');
+
+      if (!logo || !mainContent) return;
+
+      function onScroll() {
+        if (window.scrollY === 0) {
+          logo.style.opacity = 1;
+          if (logoBox) logoBox.style.opacity = 1;
+          if (logoColoredBox) logoColoredBox.style.opacity = 1;
+          return;
+        }
+
+        const logoBottom = logo.getBoundingClientRect().bottom;
+        const contentTop = mainContent.getBoundingClientRect().top;
+        const fadeStart = 150;
+
+        let distance = contentTop - logoBottom;
+        let opacity = distance / fadeStart;
+        opacity = Math.min(Math.max(opacity, 0), 1);
+
+        logo.style.opacity = opacity;
+        if (logoBox) logoBox.style.opacity = opacity;
+        if (logoColoredBox) logoColoredBox.style.opacity = opacity;
+      }
+
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    };
+  </script>
+
+</body>
+</html>
