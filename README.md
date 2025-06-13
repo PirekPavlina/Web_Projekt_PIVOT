@@ -32,3 +32,9 @@ Full project description is available here: [ProjectPivot on Medium](https://med
 ## Author
 
 Pavlína Pírek
+
+---
+
+![IMG_9285](https://github.com/user-attachments/assets/5b702ed9-8ebf-4f56-bada-11acfa67d83b)
+
+
